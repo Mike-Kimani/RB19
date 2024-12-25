@@ -29,20 +29,22 @@ double PID::calculateOutput(double setPoint, double processVariable) {
     }
     _derivative = (_error - _previousError)/_dt;
 
-    printf("Integral: %.2f || Derivative: %.2f\n", _integral, _derivative);
+    printf("Proportional: %.2f || Integral: %.2f || Derivative: %.2f\n",_error, _integral, _derivative);
 
     output = _kp*_error + _ki*_integral + _kd * _derivative;
-    if (abs(output - _previousOutput) > MAX_PID_DIFF) {
-        output = _previousOutput;
-    }
-    if (output > MAX_PID_OUTPUT) {
-        output = _previousOutput;
-    }
-    if (output < MIN_PID_OUTPUT) {
-        output = _previousOutput;
-    }
+    // if (abs(output - _previousOutput) > MAX_PID_DIFF) {
+    //     output = _previousOutput;
+    // }
+    // if (output > MAX_PID_OUTPUT) {
+    //     output = _previousOutput;
+    // }
+    // if (output < MIN_PID_OUTPUT) {
+    //     output = _previousOutput;
+    // }
     _previousError = _error;
     _previousOutput = output;
+    printf("PID D Output: %.2f\n", output);
+
     
 
     return output;
